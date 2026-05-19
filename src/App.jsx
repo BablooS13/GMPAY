@@ -2,10 +2,9 @@ import { useMemo, useState } from 'react'
 import * as XLSX from 'xlsx'
 import accountsFileUrl from './assets/accounts.xlsx?url'
 
-const BASE_URL = 'https://api.h5r1xc.xyz/xxapi/buyitoken/waitpayerpaymentslip'
+const BASE_URL = 'https://mgr.inpays.top/xxapi/buyitoken/waitpayerpaymentslip'
 const REQUEST_LIMIT = 200
-const TOKEN_STORAGE_KEY = 'tivrapay-indiatoken'
-
+const TOKEN_STORAGE_KEY = 'bopay-indiatoken'
 const OUTPUT_HEADERS = [
   'rptNo',
   'orderNo',
@@ -64,13 +63,13 @@ async function fetchWithRetry(url, options, maxRetries = 3) {
   throw new Error('Max retry reached')
 }
 
-async function fetchTivraPayData(indiaToken) {
+async function fetchBoPayData(indiaToken) {
   const options = {
     method: 'GET',
 headers: {
   Accept: 'application/json',
   indiatoken: indiaToken,
-  'x-rs-cfg-tivpayreqgate': 'A7K9X2M8Q4P1Z'
+ 'x-rs-cfg-bopayreqgate': '7SF3JFKA87LB'
 },
   }
 
@@ -206,7 +205,7 @@ function App() {
         throw new Error('No valid 4-digit account numbers in accounts.xlsx')
       }
 
-      const { total, allList } = await fetchTivraPayData(cleanToken)
+const { total, allList } = await fetchBoPayData(cleanToken)
 
       const normalizedApi = allList.map((item) => {
         const apiLast4 = extractLastFour(item.acctNo)
