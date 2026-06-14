@@ -205,8 +205,7 @@ function App() {
         throw new Error('No valid 4-digit account numbers in accounts.xlsx')
       }
 
-const { total, allList } = await fetchBoPayData(cleanToken)
-
+const { total, allList } = await fetchGmPayData(cleanToken)
       const normalizedApi = allList.map((item) => {
         const apiLast4 = extractLastFour(item.acctNo)
         const matches = accountMap.get(apiLast4) || []
