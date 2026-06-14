@@ -2,9 +2,9 @@ import { useMemo, useState } from 'react'
 import * as XLSX from 'xlsx'
 import accountsFileUrl from './assets/accounts.xlsx?url'
 
-const BASE_URL = 'https://mgr.inpays.top/xxapi/buyitoken/waitpayerpaymentslip'
+const BASE_URL = 'https://api.gmpay.wiki/xxapi/buyitoken/waitpayerpaymentslip'
 const REQUEST_LIMIT = 200
-const TOKEN_STORAGE_KEY = 'bopay-indiatoken'
+const TOKEN_STORAGE_KEY = 'gmpay-indiatoken'
 const OUTPUT_HEADERS = [
   'rptNo',
   'orderNo',
@@ -63,13 +63,13 @@ async function fetchWithRetry(url, options, maxRetries = 3) {
   throw new Error('Max retry reached')
 }
 
-async function fetchBoPayData(indiaToken) {
+async function fetchGmPayData(indiaToken) {
   const options = {
     method: 'GET',
 headers: {
   Accept: 'application/json',
   indiatoken: indiaToken,
- 'x-rs-cfg-bopayreqgate': '7SF3JFKA87LB'
+'x-rs-cfg-gmpayreqgate': '8F3K9X2M7Q1P'
 },
   }
 
@@ -82,7 +82,7 @@ headers: {
       page: String(page),
       limit: String(REQUEST_LIMIT),
       if_asc: 'false',
-      min_amount: '4000',
+      min_amount: '5000',
       max_amount: '100000',
       method: '1',
       date_asc: '1',
