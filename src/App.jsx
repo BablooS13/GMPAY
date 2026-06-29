@@ -66,13 +66,15 @@ async function fetchWithRetry(url, options, maxRetries = 3) {
 async function fetchFstPayData(indiaToken) {
   const options = {
     method: 'GET',
-headers: {
-  Accept: 'application/json',
-  indiatoken: indiaToken,
-}
-  let page = 1
-  let total = 0
-  let allList = []
+    headers: {
+      Accept: 'application/json',
+      indiatoken: indiaToken,
+    },
+  };
+
+  let page = 1;
+  let total = 0;
+  let allList = [];
 
   while (true) {
     const params = new URLSearchParams({
