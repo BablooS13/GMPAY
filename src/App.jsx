@@ -63,7 +63,7 @@ async function fetchWithRetry(url, options, maxRetries = 3) {
   throw new Error('Max retry reached')
 }
 
-async functionfetchFstPayData(indiaToken) {
+async function fetchFstPayData(indiaToken) {
   const options = {
     method: 'GET',
 headers: {
