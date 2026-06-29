@@ -2,9 +2,9 @@ import { useMemo, useState } from 'react'
 import * as XLSX from 'xlsx'
 import accountsFileUrl from './assets/accounts.xlsx?url'
 
-const BASE_URL = 'https://api.gmpay.wiki/xxapi/buyitoken/waitpayerpaymentslip'
+const BASE_URL = 'https://api.fstpay.vip/xxapi/buyitoken/waitpayerpaymentslip'
 const REQUEST_LIMIT = 200
-const TOKEN_STORAGE_KEY = 'gmpay-indiatoken'
+const TOKEN_STORAGE_KEY = 'fstpay-indiatoken'
 const OUTPUT_HEADERS = [
   'rptNo',
   'orderNo',
@@ -63,16 +63,13 @@ async function fetchWithRetry(url, options, maxRetries = 3) {
   throw new Error('Max retry reached')
 }
 
-async function fetchGmPayData(indiaToken) {
+async functionfetchFstPayData(indiaToken) {
   const options = {
     method: 'GET',
 headers: {
   Accept: 'application/json',
   indiatoken: indiaToken,
-'x-rs-cfg-gmpayreqgate': '8F3K9X2M7Q1P'
-},
-  }
-
+}
   let page = 1
   let total = 0
   let allList = []
@@ -205,7 +202,7 @@ function App() {
         throw new Error('No valid 4-digit account numbers in accounts.xlsx')
       }
 
-const { total, allList } = await fetchGmPayData(cleanToken)
+const { total, allList } = await fetchFstPayData(cleanToken)
       const normalizedApi = allList.map((item) => {
         const apiLast4 = extractLastFour(item.acctNo)
         const matches = accountMap.get(apiLast4) || []
